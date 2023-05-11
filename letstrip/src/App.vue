@@ -1,9 +1,25 @@
 <template>
   <div id="app">
-    <nav style="display: none"><router-link to="/">Home</router-link> |</nav>
-    <router-view />
+    <home-view></home-view>
   </div>
 </template>
+
+
+
+
+
+
+<script>
+import HomeView from "./views/HomeView.vue";
+
+export default {
+  name: "AppVue",
+  components: {
+    HomeView,
+  },
+};
+</script>
+
 
 <style>
 #app {

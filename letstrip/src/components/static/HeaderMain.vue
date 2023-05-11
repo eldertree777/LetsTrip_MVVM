@@ -20,9 +20,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="${root}/plan">
+              <router-link class="nav-link" to="/SearchAttraction">
                 <i class="fa-solid fa-map-location-dot"></i> 지역별여행지
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="${root}/plan"
