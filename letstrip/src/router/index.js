@@ -13,6 +13,16 @@ const routes = [
     name: "SearchAttraction",
     component: () => import("@/components/board/SearchAttraction.vue"),
   },
+  {
+    path: "/board",
+    name: "InfoBoard",
+    component: () => import("@/components/board/InfoBoard.vue"),
+  },
+  {
+    path: "/boardWrtie",
+    name: "InfoBoardWrite",
+    component: () => import("@/components/board/InfoBoardWrite.vue"),
+  },
   // {
   //   path: "/about",
   //   name: "about",

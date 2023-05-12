@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import HeaderMain from "@/components/static/HeaderMain2.vue";
+import HeaderMain from "@/components/static/HeaderMain.vue";
 import FooterMain from "@/components/static/FooterMain.vue";
 
 // @ is an alias to /src

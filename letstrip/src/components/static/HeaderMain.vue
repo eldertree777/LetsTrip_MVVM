@@ -35,8 +35,8 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="${root}/board"
-                ><i class="fa-solid fa-list"></i> 여행정보공유</a
+              <router-link class="nav-link" aria-current="page" to="/board"
+                ><i class="fa-solid fa-list"></i> 여행정보공유</router-link
               >
             </li>
             <li class="nav-item">
