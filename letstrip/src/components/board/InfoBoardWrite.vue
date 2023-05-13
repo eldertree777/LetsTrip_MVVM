@@ -66,20 +66,12 @@ export default {
     return {
       subject: "",
       content: "",
-      userid: "ssafy",
+      userid: "test",
     };
   },
   created() {},
   methods: {
-    onSubmit() {
-      //   var url =
-      //     "http://localhost:9003/enjoytrip/restInfo/write?content=" +
-      //     this.content +
-      //     "&title=" +
-      //     this.subject +
-      //     "&user_id=" +
-      //     this.userid;
-
+    async onSubmit() {
       const axios = require("axios");
       let data = JSON.stringify({
         content: this.content,
@@ -97,7 +89,7 @@ export default {
         data: data,
       };
 
-      axios
+      await axios
         .request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
@@ -105,6 +97,13 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+      this.moveList();
+    },
+
+    moveList() {
+      console.log("글목록 보러가자!!!");
+      this.$router.push({ path: "Board" });
     },
   },
 };

@@ -105,11 +105,17 @@
                         </tr>
                       </thead>
                       <!-- list Board -->
-                      <tbody></tbody>
+                      <tbody>
+                        <info-board-item
+                          v-for="(info, index) in infos"
+                          :key="index"
+                          :info="info"
+                        ></info-board-item>
+                      </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="row">${navigation.navigator}</div>
+                <div class="row"></div>
               </div>
               <form id="form-param" method="get" action="">
                 <input type="hidden" name="pgno" id="pgno" value="${pgno}" />
@@ -129,6 +135,7 @@
             </div>
           </div>
           <!-- center content end -->
+          test
         </div>
       </div>
     </div>
@@ -136,15 +143,26 @@
 </template>
 
 <script>
+import InfoBoardItem from "@/components/board/InfoBoardItem.vue";
+import http from "@/util/http-common.js";
+
 export default {
   name: "InfoBoard",
-  components: {},
+  components: {
+    InfoBoardItem,
+  },
   data() {
     return {
       message: "",
+      infos: [],
     };
   },
-  created() {},
+  created() {
+    http.get("/enjoytrip/restInfo/list").then(({ data }) => {
+      this.infos = data;
+      console.log(this.infos);
+    });
+  },
   methods: {},
 };
 </script>
