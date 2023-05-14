@@ -43,13 +43,13 @@
               type="button"
               id="btn-mv-modify"
               class="btn btn-outline-success mb-3 ms-1"
+              @click="InfoModify"
             >
               글수정
             </button>
             <button
-              type="button"
-              id="btn-delete"
               class="btn btn-outline-danger mb-3 ms-1"
+              @click="InfoDelete"
             >
               글삭제
             </button>
@@ -83,7 +83,22 @@ export default {
       })
       .then(console.log(this.info));
   },
-  methods: {},
+  methods: {
+    InfoDelete() {
+      console.log("delete");
+      this.$router.push({
+        name: "InfoBoardDelete",
+        params: { infono: this.infono },
+      });
+    },
+    InfoModify() {
+      console.log("modify");
+      this.$router.push({
+        name: "InfoBoardModify",
+        params: { infono: this.infono },
+      });
+    },
+  },
 };
 </script>
 

@@ -24,16 +24,16 @@
                 <i class="fa-solid fa-map-location-dot"></i> 지역별여행지
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="${root}/plan"
-                ><i class="fa-regular fa-calendar"></i> 나의여행계획</a
-              >
+                ><i class="fa-regular fa-calendar"></i
+              ></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="${root}/hotplace"
-                ><i class="fa-solid fa-camera"></i> 핫플자랑하기</a
-              >
-            </li>
+                ><i class="fa-solid fa-camera"></i
+              ></a>
+            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" aria-current="page" to="/board"
                 ><i class="fa-solid fa-list"></i> 여행정보공유</router-link
@@ -41,8 +41,8 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="${root}/notice"
-                ><i class="fa-solid fa-list"></i> 공지사항</a
-              >
+                ><i class="fa-solid fa-list"></i
+              ></a>
             </li>
           </ul>
 

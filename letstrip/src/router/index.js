@@ -28,6 +28,16 @@ const routes = [
     name: "InfoBoardView",
     component: () => import("@/components/board/InfoBoardView.vue"),
   },
+  {
+    path: "/boardDelete",
+    name: "InfoBoardDelete",
+    component: () => import("@/components/board/InfoBoardDelete.vue"),
+  },
+  {
+    path: "/boardModify",
+    name: "InfoBoardModify",
+    component: () => import("@/components/board/InfoBoardModify.vue"),
+  },
   // {
   //   path: "/about",
   //   name: "about",
