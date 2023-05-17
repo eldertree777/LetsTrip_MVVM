@@ -66,7 +66,7 @@ export default {
     return {
       subject: "",
       content: "",
-      userid: "test",
+      userid: "ssafy",
     };
   },
   created() {},

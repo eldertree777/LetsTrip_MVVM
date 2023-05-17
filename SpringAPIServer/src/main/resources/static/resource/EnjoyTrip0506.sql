@@ -5,22 +5,22 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema enjoytrip
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `enjoytrip` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema enjoytrip
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb3 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `enjoytrip` DEFAULT CHARACTER SET utf8mb3 ;
+USE `enjoytrip` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`category`
+-- Table `enjoytrip`.`category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`category` ;
+DROP TABLE IF EXISTS `enjoytrip`.`category` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`category` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`category` (
   `cat_id` CHAR(3) NOT NULL,
   `cat_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cat_id`))
@@ -29,11 +29,11 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`sido`
+-- Table `enjoytrip`.`sido`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`sido` ;
+DROP TABLE IF EXISTS `enjoytrip`.`sido` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`sido` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`sido` (
   `sido_code` INT NOT NULL,
   `sido_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`sido_code`),
@@ -43,11 +43,11 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`gugun`
+-- Table `enjoytrip`.`gugun`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`gugun` ;
+DROP TABLE IF EXISTS `enjoytrip`.`gugun` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`gugun` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`gugun` (
   `gugun_code` INT NOT NULL,
   `gugun_name` VARCHAR(45) NOT NULL,
   `sido_code` INT NOT NULL,
@@ -55,17 +55,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`gugun` (
   INDEX `gugun_to_sido_code_fk_idx` (`sido_code` ASC) VISIBLE,
   CONSTRAINT `gugun_to_sido_code_fk`
     FOREIGN KEY (`sido_code`)
-    REFERENCES `mydb`.`sido` (`sido_code`))
+    REFERENCES `enjoytrip`.`sido` (`sido_code`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`attraction_info`
+-- Table `enjoytrip`.`attraction_info`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`attraction_info` ;
+DROP TABLE IF EXISTS `enjoytrip`.`attraction_info` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`attraction_info` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`attraction_info` (
   `content_id` INT NOT NULL,
   `content_type_id` INT NULL DEFAULT NULL,
   `title` VARCHAR(100) NULL DEFAULT NULL,
@@ -91,23 +91,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`attraction_info` (
   INDEX `info_to_cat_cat_id_fk_idx` (`cat_id` ASC) VISIBLE,
   CONSTRAINT `info_to_cat_cat_id_fk`
     FOREIGN KEY (`cat_id`)
-    REFERENCES `mydb`.`category` (`cat_id`),
+    REFERENCES `enjoytrip`.`category` (`cat_id`),
   CONSTRAINT `info_to_gugun_code_fk_idx`
     FOREIGN KEY (`gugun_code`)
-    REFERENCES `mydb`.`gugun` (`gugun_code`),
+    REFERENCES `enjoytrip`.`gugun` (`gugun_code`),
   CONSTRAINT `info_to_sido_code_fk_idx`
     FOREIGN KEY (`sido_code`)
-    REFERENCES `mydb`.`sido` (`sido_code`))
+    REFERENCES `enjoytrip`.`sido` (`sido_code`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`user`
+-- Table `enjoytrip`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`user` ;
+DROP TABLE IF EXISTS `enjoytrip`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`user` (
   `user_id` VARCHAR(16) NOT NULL,
   `user_name` VARCHAR(16) NOT NULL,
   `user_password` VARCHAR(100) NOT NULL,
@@ -122,11 +122,11 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`info_board`
+-- Table `enjoytrip`.`info_board`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`info_board` ;
+DROP TABLE IF EXISTS `enjoytrip`.`info_board` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`info_board` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`info_board` (
   `board_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(16) NOT NULL,
   `title` VARCHAR(100) NOT NULL,
@@ -137,17 +137,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`info_board` (
   INDEX `notice_to_member_user_id_fk_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `notice_to_member_user_id_fk`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`user_id`))
+    REFERENCES `enjoytrip`.`user` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`comment`
+-- Table `enjoytrip`.`comment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`comment` ;
+DROP TABLE IF EXISTS `enjoytrip`.`comment` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`comment` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`comment` (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
   `board_id` INT NULL DEFAULT NULL,
   `user_id` VARCHAR(16) NULL DEFAULT NULL,
@@ -160,26 +160,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`comment` (
   INDEX `comment_to_notice_board_id_fk_idx` (`board_id` ASC) VISIBLE,
   CONSTRAINT `comment_to_comment_fk`
     FOREIGN KEY (`p_comment_id`)
-    REFERENCES `mydb`.`comment` (`comment_id`)
+    REFERENCES `enjoytrip`.`comment` (`comment_id`)
     ON DELETE CASCADE,
   CONSTRAINT `comment_to_notice_board_id_fk`
     FOREIGN KEY (`board_id`)
-    REFERENCES `mydb`.`info_board` (`board_id`)
+    REFERENCES `enjoytrip`.`info_board` (`board_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `comment_to_user_id_fk`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`user_id`))
+    REFERENCES `enjoytrip`.`user` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`hotplace`
+-- Table `enjoytrip`.`hotplace`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`hotplace` ;
+DROP TABLE IF EXISTS `enjoytrip`.`hotplace` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`hotplace` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`hotplace` (
   `hotplace_id` INT NOT NULL AUTO_INCREMENT,
   `cat_id` CHAR(3) NULL DEFAULT NULL,
   `trip_time` VARCHAR(100) NULL DEFAULT NULL,
@@ -196,22 +196,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`hotplace` (
   INDEX `hotplace_to_memer_user_id_fk_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `hotplace_to_cat_cat_id_fk`
     FOREIGN KEY (`cat_id`)
-    REFERENCES `mydb`.`category` (`cat_id`)
+    REFERENCES `enjoytrip`.`category` (`cat_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `hotplace_to_member_user_id_fk`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`user_id`))
+    REFERENCES `enjoytrip`.`user` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`sun_status`
+-- Table `enjoytrip`.`sun_status`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`sun_status` ;
+DROP TABLE IF EXISTS `enjoytrip`.`sun_status` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`sun_status` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`sun_status` (
   `datetime` CHAR(6) NOT NULL,
   `sido_name` VARCHAR(45) NOT NULL,
   `rise_time` CHAR(4) NULL DEFAULT NULL,
@@ -220,17 +220,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`sun_status` (
   INDEX `sun_to_sido_fk_idx` (`sido_name` ASC) VISIBLE,
   CONSTRAINT `sun_to_sido_fk`
     FOREIGN KEY (`sido_name`)
-    REFERENCES `mydb`.`sido` (`sido_name`))
+    REFERENCES `enjoytrip`.`sido` (`sido_name`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`trip`
+-- Table `enjoytrip`.`trip`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`trip` ;
+DROP TABLE IF EXISTS `enjoytrip`.`trip` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`trip` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`trip` (
   `trip_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(16) NULL DEFAULT NULL,
   `register_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -243,17 +243,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`trip` (
   INDEX `path_to_user_id_fk_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `path_to_user_id_fk`
     FOREIGN KEY (`user_id`)
-    REFERENCES `mydb`.`user` (`user_id`))
+    REFERENCES `enjoytrip`.`user` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`trip_path`
+-- Table `enjoytrip`.`trip_path`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`trip_path` ;
+DROP TABLE IF EXISTS `enjoytrip`.`trip_path` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`trip_path` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`trip_path` (
   `content_id` INT NOT NULL,
   `trip_id` INT NOT NULL,
   `startdate` VARCHAR(100) NULL DEFAULT NULL,
@@ -262,20 +262,20 @@ CREATE TABLE IF NOT EXISTS `mydb`.`trip_path` (
   INDEX `location_to_trip_path_id_fk_idx` (`trip_id` ASC) VISIBLE,
   CONSTRAINT `location_to_attraction_info`
     FOREIGN KEY (`content_id`)
-    REFERENCES `mydb`.`attraction_info` (`content_id`),
+    REFERENCES `enjoytrip`.`attraction_info` (`content_id`),
   CONSTRAINT `location_to_trip_path_id_fk`
     FOREIGN KEY (`trip_id`)
-    REFERENCES `mydb`.`trip` (`trip_id`))
+    REFERENCES `enjoytrip`.`trip` (`trip_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`weather`
+-- Table `enjoytrip`.`weather`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`weather` ;
+DROP TABLE IF EXISTS `enjoytrip`.`weather` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`weather` (
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`weather` (
   `datetime` CHAR(6) NOT NULL,
   `sido_name` VARCHAR(45) NOT NULL,
   `weather` VARCHAR(45) NOT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`weather` (
   INDEX `weather_to_sido_idx` (`sido_name` ASC) VISIBLE,
   CONSTRAINT `weather_to_sido`
     FOREIGN KEY (`sido_name`)
-    REFERENCES `mydb`.`sido` (`sido_name`))
+    REFERENCES `enjoytrip`.`sido` (`sido_name`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
