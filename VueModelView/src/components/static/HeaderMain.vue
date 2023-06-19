@@ -40,9 +40,9 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="${root}/notice"
-                ><i class="fa-solid fa-list"></i
-              ></a>
+              <router-link class="nav-link" aria-current="page" to="/test"
+                ><i class="fa-solid fa-list"></i> test</router-link
+              >
             </li>
           </ul>
 
